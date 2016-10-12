@@ -150,5 +150,32 @@ animation filler::fill(PNG& img, int x, int y, colorPicker& fillColor,
      *        have been checked. So if frameFreq is set to 1, a pixel should
      *        be filled every frame.
      */
+	
+	OrderingStructure<T> dickPix;
+	Animation anim();
+	
+	T first = img(x, y);
+	dickPix.add(fisrt);
+	int modPix = 0;	// modified pixel count
+	while(!dickPix.isEmpty)
+	{
+		T cur = dickPix.remove();
+		int euclidian = (int)pow((first.red - cur.red), 2) +
+						(int)pow((first.green - cur.green), 2) +
+						(int)pow((first.blue - cur.blue), 2);
+		if(euclidian <= tolerance)
+		{
+			img(x, y) = fillColor(x, y);
+			modPix++;
+			if(modPix == frameFreq)
+			{
+				anim.addFrame(img);
+				modPix = 0;
+			}
+		}
+		dickPix
+		
+	}
+	
     return animation();
 }
