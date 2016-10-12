@@ -52,9 +52,11 @@ gradientColorPicker::gradientColorPicker(RGBAPixel fadeColor1,
  */
 RGBAPixel gradientColorPicker::operator()(int x, int y)
 {
-    RGBAPixel color;
-    /**
-     * @todo Return the correct color here!
-     */
+    int d = abs(centerX - x) + abs(centerY - y);
+	double scale = (double)d / (double)radius;
+	int rFill = fadeColor1.red - (int)floor(scale*fadeColor1.red) + (int)floor(scale*fadeColor2.red);
+	int gFill = fadeColor1.green - (int)floor(scale*fadeColor1.green) + (int)floor(scale*fadeColor2.green);
+	int bFill = fadeColor1.blue - (int)floor(scale*fadeColor1.blue) + (int)floor(scale*fadeColor2.blue);
+	RGBAPixel color(rFill, gFill, bFill);
     return color;
 }
