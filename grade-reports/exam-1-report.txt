@@ -1,0 +1,25 @@
+Exam report for Jacob Brown
+===========================
+
+Scores
+------
+
+  Problem                   Points
+  ----------------------- --------
+  constructors-1b              4.0
+  constructors-3c              4.0
+  km-arrays-1b                 0.0
+  km-declarationopts-2c        4.0
+  km-firstclass-1d             4.0
+  km-pointersintro-2b          0.0
+  passbyvalue-1a               4.0
+  km-makefile-1c               0.8
+  rectangle                   18.0
+
+Total score: 38.8/50 (77.6%)
+
+Code Problem Test Output
+------------------------
+
+See `tests.txt` (or `tests-1.txt` and `tests-2.txt`) for autograder test
+outputs.

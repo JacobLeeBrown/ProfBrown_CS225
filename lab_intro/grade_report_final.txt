@@ -1,0 +1,22 @@
+Grading r2075 by jlbrown5 committed on Fri Aug 26 17:52:06 CDT 2016
+Monad Autograder
+Testing lab_intro at 2016-08-29 00:20:22
+
+"In the absence of our leader, I'm assuming control." ~ Kyle Johnson
+
+Setting up test environment...
+Compiling...
+================================================================
+
+
+Running tests...
+================================================================
+testBrighten  . [33 pts] - passed
+testCrosshairs  [33 pts] - passed
+testBlendImages [34 pts] - passed
+
+
+Total score...
+================================================================
+TOTAL SCORE: 100
+
