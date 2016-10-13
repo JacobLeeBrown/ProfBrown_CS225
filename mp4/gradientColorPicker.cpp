@@ -14,7 +14,7 @@ gradientColorPicker::gradientColorPicker(RGBAPixel fadeColor1,
                                          RGBAPixel fadeColor2, int radius,
                                          int centerX, int centerY)
 {
-    	this->fadeColor1 = fadeColor1;
+    this->fadeColor1 = fadeColor1;
 	this->fadeColor2 = fadeColor2;
 	this->radius = radius;
 	this->centerX = centerX;
@@ -52,11 +52,18 @@ gradientColorPicker::gradientColorPicker(RGBAPixel fadeColor1,
  */
 RGBAPixel gradientColorPicker::operator()(int x, int y)
 {
-    	int d = abs(centerX - x) + abs(centerY - y);
-	double scale = (double)d / (double)radius;
-	int rFill = fadeColor1.red - (int)floor(scale*fadeColor1.red) + (int)floor(scale*fadeColor2.red);
-	int gFill = fadeColor1.green - (int)floor(scale*fadeColor1.green) + (int)floor(scale*fadeColor2.green);
-	int bFill = fadeColor1.blue - (int)floor(scale*fadeColor1.blue) + (int)floor(scale*fadeColor2.blue);
-	RGBAPixel color(rFill, gFill, bFill);
+    int d = abs(centerX - x) + abs(centerY - y);
+    if(d <= radius)
+    {
+		double scale = (double)d / (double)radius;
+		int rFill = fadeColor1.red - (int)floor(scale*fadeColor1.red) + (int)floor(scale*fadeColor2.red);
+		int gFill = fadeColor1.green - (int)floor(scale*fadeColor1.green) + (int)floor(scale*fadeColor2.green);
+		int bFill = fadeColor1.blue - (int)floor(scale*fadeColor1.blue) + (int)floor(scale*fadeColor2.blue);
+		RGBAPixel color(rFill, gFill, bFill);
     	return color;
+	}
+	else
+	{
+		return fadeColor2;
+	}
 }

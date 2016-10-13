@@ -151,13 +151,32 @@ animation filler::fill(PNG& img, int x, int y, colorPicker& fillColor,
      *        be filled every frame.
      */
 	
-	OrderingStructure<T> dickPix;
+    // The ordering stucture that will hold the elements as they are processed
+	OrderingStructure<T> dickPix();
+    // The same ordering structures that 
+    // The animation that will show the algorithm
 	Animation anim();
-	
+
+    // The 2D bool array that will keep track of which pixels are processed
+    // Initialize every entry to false since we've yet to check any pixels
+	bool processed[img.height()][img.width()];
+    for(int yi = 0; yi < img.height(); yi++)
+    {
+        for(int xi = 0; xi < img.width(); xi++)
+        {
+            processed[yi][xi] = false;
+        }
+    }
+
+    // The first point checked, add it to the OrderingStructure
 	T first = img(x, y);
-	dickPix.add(fisrt);
-	int modPix = 0;	// modified pixel count
-	while(!dickPix.isEmpty)
+	dickPix.add(first);
+    // Counter for how many pixels have been modified
+	int modPix = 0;
+
+
+
+	/*while(!dickPix.isEmpty)
 	{
 		T cur = dickPix.remove();
 		int euclidian = (int)pow((first.red - cur.red), 2) +
@@ -175,7 +194,7 @@ animation filler::fill(PNG& img, int x, int y, colorPicker& fillColor,
 		}
 		dickPix
 		
-	}
+	}*/
 	
-    return animation();
+    return anim;
 }
