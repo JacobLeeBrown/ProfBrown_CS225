@@ -1,8 +1,8 @@
-Grading r29167 by enx-cs225autograder committed on Sun Oct  9 02:16:17 CDT 2016
+Grading r31279 by jlbrown5 committed on Wed Oct 12 23:50:57 CDT 2016
 Monad Autograder
-Testing mp4 at 2016-10-10 01:10:41
+Testing mp4 at 2016-10-13 01:04:41
 
-"If you have a procedure with ten parameters, you probably missed some." ~ Alan J. Perlis
+"Chicken is basically a vegetable, I mean, if you compare it to steak." ~ Sean Massung
 
 Setting up test environment...
 Compiling...
@@ -40,9 +40,9 @@ testThroughStackQueue  . . . . . [2 pts] - passed
 testEnqueueConstantTime  . . . . [2 pts] - passed
 testDequeueConstantTime  . . . . [2 pts] - passed
 testEnqueuePeekDequeueTime . . . [2 pts] - passed
-solid_picker_15  . . . . . . . . [4 pts] - FAILED
-gradient_picker_16 . . . . . . . [4 pts] - FAILED
-gradient_picker_17 . . . . . . . [4 pts] - FAILED
+solid_picker_15  . . . . . . . . [4 pts] - passed
+gradient_picker_16 . . . . . . . [4 pts] - passed
+gradient_picker_17 . . . . . . . [4 pts] - passed
 DFS_solid  . . . . . . . . . . . [4 pts] - FAILED
 BFS_solid  . . . . . . . . . . . [4 pts] - FAILED
 DFS_grid . . . . . . . . . . . . [4 pts] - FAILED
@@ -65,5 +65,5 @@ BFS_29 . . . . . . . . . . . . . [2 pts] - FAILED
 
 Total score...
 ================================================================
-TOTAL SCORE: 40
+TOTAL SCORE: 52
 
