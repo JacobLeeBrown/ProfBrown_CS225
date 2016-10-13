@@ -7,6 +7,8 @@
  * @date Fall 2012
  */
 #include "filler.h"
+#include <vector>
+using std::vector;
 
 animation filler::dfs::fillSolid(PNG& img, int x, int y, RGBAPixel fillColor,
                                  int tolerance, int frameFreq)
@@ -167,44 +169,48 @@ animation filler::fill(PNG& img, int x, int y, colorPicker& fillColor,
      */
 	
     // The ordering stucture that will hold the elements as they are processed
-	OrderingStructure<T> dickPix();
+	OrderingStructure<RGBAPixel*> dickPix;
     // The same ordering structures that keep track of x and y coords of corresponding points
-    OrderingStructure<int> dickPixX();
-    OrderingStructure<int> dickPixY();
+    OrderingStructure<int> dickPixX;
+    OrderingStructure<int> dickPixY;
     // The animation that will show the algorithm
-	Animation anim();
+	animation anim;
 
     // The 2D bool array that will keep track of which pixels are processed
     // Initialize every entry to false since we've yet to check any pixels
     int height = img.height();
     int width = img.width();
-	bool processed[height][width];
+	vector<bool> rows(width, false);
+    vector<vector<bool>> processed(height, rows);
+    /*bool processed[height][width];
     for(int yi = 0; yi < height; yi++)
     {
         for(int xi = 0; xi < width; xi++)
         {
             processed[yi][xi] = false;
         }
-    }
+    }*/
 
     // The first point checked, add it to the OrderingStructure
-	T first = img(x, y);
+	RGBAPixel* first = img(x, y);
 	dickPix.add(first);
     // Counter for how many pixels have been modified
 	int modPix = 0;
     while(!dickPix.isEmpty())
 	{
         // obtain current pixel and coordinates
-		T cur = dickPix.remove();
+		RGBAPixel* cur = dickPix.remove();
         int curX = dickPixX.remove();
         int curY = dickPixY.remove();
 
-		int euclidian = (int)pow((first.red - cur.red), 2) +
-				(int)pow((first.green - cur.green), 2) +
-				(int)pow((first.blue - cur.blue), 2);
+		int euclidian = (int)pow((first->red - cur->red), 2) +
+				(int)pow((first->green - cur->green), 2) +
+				(int)pow((first->blue - cur->blue), 2);
 		if(euclidian <= tolerance && !processed[curY][curX])
 		{
-			img(curX, curY) = fillColor(curX, curY);
+			img(curX, curY)->red = fillColor(curX, curY).red;
+            img(curX, curY)->green = fillColor(curX, curY).green;
+            img(curX, curY)->blue = fillColor(curX, curY).blue;
 			modPix++;
 			if(modPix == frameFreq)
 			{
