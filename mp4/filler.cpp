@@ -168,16 +168,20 @@ animation filler::fill(PNG& img, int x, int y, colorPicker& fillColor,
 	
     // The ordering stucture that will hold the elements as they are processed
 	OrderingStructure<T> dickPix();
-    // The same ordering structures that 
+    // The same ordering structures that keep track of x and y coords of corresponding points
+    OrderingStructure<int> dickPixX();
+    OrderingStructure<int> dickPixY();
     // The animation that will show the algorithm
 	Animation anim();
 
     // The 2D bool array that will keep track of which pixels are processed
     // Initialize every entry to false since we've yet to check any pixels
-	bool processed[img.height()][img.width()];
-    for(int yi = 0; yi < img.height(); yi++)
+    int height = img.height();
+    int width = img.width();
+	bool processed[height][width];
+    for(int yi = 0; yi < height; yi++)
     {
-        for(int xi = 0; xi < img.width(); xi++)
+        for(int xi = 0; xi < width; xi++)
         {
             processed[yi][xi] = false;
         }
@@ -186,35 +190,59 @@ animation filler::fill(PNG& img, int x, int y, colorPicker& fillColor,
     // The first point checked, add it to the OrderingStructure
 	T first = img(x, y);
 	dickPix.add(first);
-<<<<<<< HEAD
     // Counter for how many pixels have been modified
 	int modPix = 0;
-
-
-
-	/*while(!dickPix.isEmpty)
-=======
-	int modPix = 0;	// modified pixel count
-	while(!dickPix.isEmpty())
->>>>>>> origin/master
+    while(!dickPix.isEmpty())
 	{
+        // obtain current pixel and coordinates
 		T cur = dickPix.remove();
+        int curX = dickPixX.remove();
+        int curY = dickPixY.remove();
+
 		int euclidian = (int)pow((first.red - cur.red), 2) +
 				(int)pow((first.green - cur.green), 2) +
 				(int)pow((first.blue - cur.blue), 2);
-		if(euclidian <= tolerance)
+		if(euclidian <= tolerance && !processed[curY][curX])
 		{
-			img(x, y) = fillColor(x, y);
+			img(curX, curY) = fillColor(curX, curY);
 			modPix++;
 			if(modPix == frameFreq)
 			{
 				anim.addFrame(img);
 				modPix = 0;
 			}
+            processed[curY][curX] = true;
 		}
-		dickPix
-		
-	}*/
+        
+        // add the right neighbor and its respective coordinates if valid
+        if(curX+1 < width)
+        {
+    		dickPix.add(img(curX+1, curY));
+            dickPixX.add(curX+1);
+            dickPixY.add(curY);
+        }
+        // add the down neighbor and its respective coordinates if valid
+        if(curY+1 < height)
+        {
+            dickPix.add(img(curX, curY+1));
+            dickPixX.add(curX);
+            dickPixY.add(curY+1);
+        }
+        // add the left neighbor and its respective coordinates if valid
+        if(curX-1 > 0)
+        {
+            dickPix.add(img(curX-1, curY));
+            dickPixX.add(curX-1);
+            dickPixY.add(curY);
+        }
+        // add the up neighbor and its respective coordinates if valid
+        if(curY-1 > 0)
+        {
+            dickPix.add(img(curX, curY-1));
+            dickPixX.add(curX);
+            dickPixY.add(curY-1);
+        }
+	}
 	
     return anim;
 }
