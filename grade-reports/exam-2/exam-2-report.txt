@@ -1,0 +1,30 @@
+Exam 2 report for Jacob Brown
+=============================
+
+Scores
+------
+
+  Problem                            Points
+  ------------------------------- ---------
+  mc-constructors-fa16-6e            0.0000
+  mc-destructors-fa16-04d            4.0000
+  mc-inheritance-fa16-2e             4.0000
+  mc-linked-lists-tc-fa16-011d       4.0000
+  mc-operator-overload-fa16-04e      0.0000
+  mc-ref-params-fa16-01a             4.0000
+  mc-templates-fa16-06h              0.0000
+  easy-03                           12.4432
+  hard-02                            1.1424
+
+"Easy" code is out of 14 points. "Hard" code is out of 8 points.
+
+Total score: 29.5856/50 (59.1712%)
+
+Code Problem Test Output
+------------------------
+
+See `test-easy-*.txt` and `test-hard-*.txt` for autograder test outputs.
+
+Questions / problems of a specific nature, please email mattox.
+Questions / problems that look like they would have affected a lot of
+people, please post on Piazza.

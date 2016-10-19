@@ -1,0 +1,87 @@
+CD to .. 
+/home/mattox/repos/cs225/fa16-exam2-grading/submissions/jlbrown5
+###############################
+##                           ##
+##     Grading question      ##
+##                           ##
+###############################
+Grader dir is /home/mattox/repos/cs225/fa16-exam2-grading/code-grading/scripts
+qid is hard-02
+variant is
+test_dir is /home/mattox/repos/cs225/fa16-exam2-grading/code-grading/scripts/tests/hard-02/
+fullTmpDir = /home/mattox/repos/cs225/fa16-exam2-grading/submissions/jlbrown5/grade-.nln
+:: Compiling...
+g++ -std=c++0x -c -g -O0 -Wall -Wextra -Wno-unused-function   -c -o hard.o hard.cpp
+hard.cpp: In function ‘void merge(LinkedList*, LinkedList*, LinkedList*)’:
+hard.cpp:53:6: warning: unused variable ‘i1’ [-Wunused-variable]
+  int i1 = 0;
+      ^~
+hard.cpp:54:6: warning: unused variable ‘i2’ [-Wunused-variable]
+  int i2 = 0;
+      ^~
+hard.cpp:55:6: warning: unused variable ‘im’ [-Wunused-variable]
+  int im = 0;
+      ^~
+hard.cpp:51:24: warning: unused parameter ‘mrg’ [-Wunused-parameter]
+            LinkedList* mrg)
+                        ^~~
+:: Compiled successfully!
+:: Compiling provided code...
+
+:: Compiling test_empty.
+:: Running test_empty.
+timeout: the monitored command dumped core
+/home/mattox/repos/cs225/fa16-exam2-grading/code-grading/scripts/run_tests: line 105: 14887 Segmentation fault      env GRADE_FD=28 timeout "$TIMEOUT" ./"$exe" 28> "$grade_tmp" 2>&1
+     14888 Done                    | head -c 30K
+:: Failed test_empty: Exited with non-zero exit status 139.
+
+:: Compiling test_empty_second.
+:: Running test_empty_second.
+timeout: the monitored command dumped core
+/home/mattox/repos/cs225/fa16-exam2-grading/code-grading/scripts/run_tests: line 105: 14896 Segmentation fault      env GRADE_FD=28 timeout "$TIMEOUT" ./"$exe" 28> "$grade_tmp" 2>&1
+     14897 Done                    | head -c 30K
+:: Failed test_empty_second: Exited with non-zero exit status 139.
+
+:: Compiling test_empty_first.
+:: Running test_empty_first.
+timeout: the monitored command dumped core
+/home/mattox/repos/cs225/fa16-exam2-grading/code-grading/scripts/run_tests: line 105: 14905 Segmentation fault      env GRADE_FD=28 timeout "$TIMEOUT" ./"$exe" 28> "$grade_tmp" 2>&1
+     14906 Done                    | head -c 30K
+:: Failed test_empty_first: Exited with non-zero exit status 139.
+
+:: Compiling test_small_second.
+:: Running test_small_second.
+:: Failed test_small_second: Timed out (5s).
+
+:: Compiling test_small_first.
+:: Running test_small_first.
+:: Failed test_small_first: Timed out (5s).
+
+:: Compiling test_large.
+:: Running test_large.
+:: Failed test_large: Timed out (5s).
+
+Failed tests:
+- test_empty
+- test_empty_second
+- test_empty_first
+- test_small_second
+- test_small_first
+- test_large
+
+Grade for question : 14.28/100
+
+
+~ ~ ~
+
+Grade: 14.28
+
+Details:
+test,grade
+_compiled,1
+_test_empty,0
+_test_empty_second,0
+_test_empty_first,0
+_test_small_second,0
+_test_small_first,0
+_test_large,0
