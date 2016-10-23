@@ -1,0 +1,21 @@
+Current word: dog
+Sorted key  : dgo
+Key not found, adding: dgo
+Current word: ate
+Sorted key  : aet
+Key not found, adding: aet
+Current word: jump
+Sorted key  : jmpu
+Key not found, adding: jmpu
+Current word: god
+Sorted key  : dgo
+Key found, inserting: god
+Current word: eat
+Sorted key  : aet
+Key found, inserting: eat
+Current word: punch
+Sorted key  : chnpu
+Key not found, adding: chnpu
+Anagrams for dog:
+dog
+god
