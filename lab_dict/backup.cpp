@@ -1,5 +1,8 @@
 /**
-
+ * 
+ * ~~~ Jacob's attempt at modifying Michael's shitty code to look good ~~~
+ * ~~~ Doesn't work ~~~
+ * 
  * @file common_words.cpp
  * Implementation of the CommonWords class.
  *
@@ -52,7 +55,7 @@ void CommonWords::init_file_word_maps(const vector<string>& filenames)
         // Local variable to hold the current file map data
         map<string, unsigned int> cur_file_map;
         // For each word in the words vector
-        for(auto word : words)
+        for(auto & word : words)
         {
             // Try to find the current word in the current file map data
             auto lookup = cur_file_map.find(word);
@@ -76,7 +79,7 @@ void CommonWords::init_file_word_maps(const vector<string>& filenames)
 
 void CommonWords::init_common()
 {
-	if(file_word_maps.empty()) return;
+	/*if(file_word_maps.empty()) return;
 	// Find the smallest document to decrease runtime
 	common = file_word_maps[0];
 	for(auto file_map : file_word_maps)
@@ -113,12 +116,12 @@ void CommonWords::init_common()
 		{
 			// do nothing
 		}
-	}
+	}*/
     // For each file word map in file_word_maps
-    /*for(auto file_map : file_word_maps)
+    for(auto & file_map : file_word_maps)
     {
         // for each word in the current file word map
-        for(auto word : file_map)
+        for(auto & word : file_map)
         {
             // See if common already has that word
             auto lookup = common.find(word.first);
@@ -133,7 +136,7 @@ void CommonWords::init_common()
                 common[word.first] = 1;
             }
         }
-    }*/
+    }
 }
 
 /**
@@ -144,23 +147,23 @@ void CommonWords::init_common()
 vector<string> CommonWords::get_common_words(unsigned int n) const
 {
 	vector<string> out;
-	for(auto iter : common)
+	/*for(auto iter : common)
 	{
 		if((iter.second) >= n)
 			out.push_back(iter.first);
 	}
-	return out;
+	return out;*/
 
-    /*
+    
     // For every word we have encountered accross all files
-    for(auto word : common)
+    for(auto & word : common)
     {
         // Check that the word appears in all files
         if(word.second == file_word_maps.size())
         {
             bool word_appears = true;
             // If so, for each file word map, check the word's frequency
-            for(auto file_map : file_word_maps)
+            for(auto & file_map : file_word_maps)
             {
                 auto lookup = file_map.find(word.first);
                 // Check if the word appears *less than* n times
@@ -177,7 +180,7 @@ vector<string> CommonWords::get_common_words(unsigned int n) const
             }
         }
     }
-    return out;*/
+    return out;
 }
 
 /**
@@ -189,9 +192,11 @@ vector<string> CommonWords::file_to_vector(const string& filename) const
     ifstream words(filename);
     vector<string> out;
 
-    if (words.is_open()) {
+    if (words.is_open())
+    {
         std::istream_iterator<string> word_iter(words);
-        while (!words.eof()) {
+        while (!words.eof())
+        {
             out.push_back(remove_punct(*word_iter));
             ++word_iter;
         }
