@@ -103,7 +103,7 @@ size_t KDTree<Dim>::my_partition(	vector<Point<Dim>>& points, int curDim,
 	// Obtain index of where we will start storing "smaller" values
 	size_t st_idx = l_idx;
 	// for every index within this section of the given list
-	for(int i = l_idx; i < r_idx; i++)
+	for(size_t i = l_idx; i < r_idx; i++)
 	{
 		// if the current point is "smaller" than the pivot value
 		if(smallerDimVal(points[i], piv_pt, curDim))
