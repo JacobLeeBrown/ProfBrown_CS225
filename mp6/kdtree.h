@@ -290,6 +290,13 @@ class KDTree
 	 */
 	void my_swap(vector<Point<Dim>>& points, size_t idx_1, size_t idx_2);
 
+    Point<Dim> findNearestNeighborHelper(const Point<Dim>& query,
+                                size_t leftIndex, size_t rightIndex, int curDim,
+                                Point<Dim> currentBest ) const;
+
+
+    int dist( const Point<Dim> & first, const Point<Dim> & second) const;
+
 };
 
 #include "kdtree.cpp"

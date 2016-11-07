@@ -2,6 +2,7 @@
  * @file kdtree.cpp
  * Implementation of KDTree class.
  */
+#include <cmath>
 
 template <int Dim>
 bool KDTree<Dim>::smallerDimVal(const Point<Dim>& first,
@@ -34,15 +35,95 @@ KDTree<Dim>::KDTree(const vector<Point<Dim>>& newPoints)
 }
 
 
+/*
+*  we have a vector Points that is sorted so as to give us a KDTree.
+*  we need to implement findnearestneighbor on it.
+*  TWO PARTS:
+*  		search to find smallest hyperrectangle that contains the point
+* 		backtrack to see if any other hyperrectangles within the radius contain the point
+*/
 template <int Dim>
 Point<Dim> KDTree<Dim>::findNearestNeighbor(const Point<Dim>& query) const
 {
-	/**
-	 * @todo Implement this function!
-	 */
-	return Point<Dim>();
+	size_t rootIndex = (points.size()-1)/2;
+
+	return findNearestNeighborHelper( query, 0, points.size()-1, 0, points[ rootIndex ] );
 }
 
+/*
+* @param query 		the point in space we are looking for
+* @param leftIndex  the index of the left-most node in our subarray
+* @param rightIndex the index of the rightmost node in our subarray
+* @param curDim		the current dimension we are on
+* @param currentBest the best point we've found so far
+* @return the point in the tree nearest to our query value
+*/
+template <int Dim>
+Point<Dim> KDTree<Dim>::findNearestNeighborHelper(const Point<Dim>& query,
+								size_t leftIndex, size_t rightIndex, int curDim,
+								Point<Dim> currentBest ) const
+{
+	int nextDim = (curDim+1)%Dim;
+	bool leftFlag = true;
+
+	if ( leftIndex == rightIndex ) // we are at a leaf
+	{	// check current node against currentBest
+		if (  shouldReplace( query, currentBest, points[rightIndex] )  )
+		{ // overwrite currentBest if current node is better
+			currentBest = points[rightIndex];
+		}
+		return currentBest;
+	}
+
+	// WE'RE NOT AT A LEAF NODE: THERE IS A SUBTREE.
+	// recurse down the half of the tree that our query point is in.
+	size_t subrootIndex = (leftIndex + rightIndex)/2;
+	// if subtree[curDim] < query && subtree < rightIndex,
+		// recurse, moving lower bound to the right.
+	if ( subrootIndex < rightIndex && smallerDimVal( points[subrootIndex], query, curDim ) )
+	{
+		currentBest = findNearestNeighborHelper( query, subrootIndex+1, rightIndex, nextDim, currentBest );
+		leftFlag = false;
+	}
+	// if subtree[currDim] > query && subtree > leftindex
+		// recurse, moving upper bound to the left.
+	if ( subrootIndex > leftIndex && smallerDimVal( query, points[subrootIndex], curDim ) )
+	{
+		currentBest = findNearestNeighborHelper( query, leftIndex, subrootIndex-1, nextDim, currentBest );
+		leftFlag = true;
+	}
+
+	// we have recursed down one of the two leaf nodes, and possibly updated currentBest.
+	// we must check if non-leaf nodes are closer.
+
+	// check if our current node, which cannot be a leaf node, is closer to our search point than
+		// our currentbest, (which is a leaf node).
+	if (  shouldReplace( query, currentBest, points[subrootIndex] )  )
+	{
+		currentBest = points[subrootIndex];
+	}
+
+    if ( pow(points[subrootIndex][curDim] - query[curDim],2) <= dist(query, currentBest) )
+    {
+        if ( leftFlag && rightIndex > subrootIndex )
+            currentBest = findNearestNeighborHelper( query, subrootIndex+1, rightIndex, nextDim, currentBest );
+        if ( !leftFlag && leftIndex < subrootIndex )
+            currentBest = findNearestNeighborHelper( query, leftIndex, subrootIndex-1, nextDim, currentBest );
+    }
+
+	return currentBest;
+}
+
+// computer distance betweer two points
+template<int Dim>
+int KDTree<Dim>::dist( const Point<Dim> & first, const Point<Dim> & second) const
+{
+    int retval = 0;
+    for ( int i=0 ; i<Dim ; i++ ) {
+        retval += pow( first[i] - second[i], 2);
+    }
+    return retval;
+}
 
 template <int Dim>
 void KDTree<Dim>::KDTree_sort(vector<Point<Dim>>& points, int curDim, 
