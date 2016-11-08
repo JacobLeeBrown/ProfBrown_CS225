@@ -1,0 +1,16 @@
+text.txt: BEGIN
+I'm a one-eyed, one-horned, flying purple people eater.
+My favorite color is orange.
+Grapes are purple or green.
+My hair has never been dyed purple.
+No more monkeys jumping on the bed!
+Purple people are the best kind of people!
+END
+
+6 test cases:
+purple in middle of sentence 1
+no purple in sentence 1
+purple in middle of sentence 2
+purple at end of sentence
+no purple in sentence 2
+Purple at start of sentence.
