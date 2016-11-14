@@ -50,7 +50,7 @@ LogfileParser::LogLine::LogLine(const string& line)
 LogfileParser::LogfileParser(const string& fname) : whenVisitedTable(256)
 {
 	/* ~~~ I don't know why this table is instantiated, nor how it could be useful since it is local ~~~ */
-	// SCHashTable<string, bool> pageVisitedTable(256);
+	//SCHashTable<string, bool> pageVisitedTable(256);
     ifstream infile(fname.c_str());
     string line;
     while (infile.good()) {
@@ -61,13 +61,16 @@ LogfileParser::LogfileParser(const string& fname) : whenVisitedTable(256)
             continue;
 
         // otherwise parse the line and update the hash tables and vector
-        LogLine ll(line);
+        LogLine ll(line); // customer, url, date
 
-        // Unique key for both the customer and the url he/she visted
+        // Unique key for both the customer and the url they visted
         string name_page = ll.customer + " " + ll.url;
 
         // Set the respective entry in the member variable hashtable to the time 
-        whenVisitedTable[name_page] = ll.date;
+        if ( whenVisitedTable.keyExists(name_page) )
+        {
+            if (whenVisitedTable[name_page] < ll.date ) whenVisitedTable[name_page] = ll.date;
+        } else whenVisitedTable[name_page] = ll.date;
 
         /* ~~~ Would normally make helper function - Checks if uniqueURLs contains the URL, then inserts if needed ~~~ */
         bool contains = false;
@@ -79,7 +82,7 @@ LogfileParser::LogfileParser(const string& fname) : whenVisitedTable(256)
                 break;
             }
         }
-        if(!contains)
+        if(!contains) // if contains is false
         {
             uniqueURLs.push_back(ll.url);
         }
