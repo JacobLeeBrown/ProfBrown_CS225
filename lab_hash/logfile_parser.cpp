@@ -67,9 +67,9 @@ LogfileParser::LogfileParser(const string& fname) : whenVisitedTable(256)
         string name_page = ll.customer + " " + ll.url;
 
         // Set the respective entry in the member variable hashtable to the time 
-        if ( whenVisitedTable.keyExists(name_page) && whenVisitedTable[name_page] < ll.date )
+        if ( whenVisitedTable.keyExists(name_page) )
         {
-            whenVisitedTable[name_page] = ll.date;
+            if (whenVisitedTable[name_page] < ll.date ) whenVisitedTable[name_page] = ll.date;
         } else whenVisitedTable[name_page] = ll.date;
 
         /* ~~~ Would normally make helper function - Checks if uniqueURLs contains the URL, then inserts if needed ~~~ */
