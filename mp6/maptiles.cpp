@@ -15,6 +15,12 @@ MosaicCanvas* mapTiles(SourceImage const& theSource,
     /**
      * @todo Implement this function!
      */
+
+	int rows = theSource.getRows();
+	int cols = theSource.getColumns();
+
+	MosaicCanvas dicksOutForHarambe = new MosaicCanvas(rows, cols);
+
     return NULL;
 }
 

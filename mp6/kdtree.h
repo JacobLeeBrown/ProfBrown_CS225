@@ -233,8 +233,7 @@ class KDTree
     void gradingPrint(std::ostream& out) const;
 
   private:
-    /** This is your KDTree representation. Modify this vector to create a
-     * KDTree. */
+    /** This is your KDTree representation. Modify this vector to create a KDTree. */
     vector<Point<Dim>> points;
 
     /** Helper function for grading */
@@ -247,10 +246,10 @@ class KDTree
 	/**
 	 * Recursive private helper function for KDTree constructor.
 	 *
-	 * @paran points The list we are sorting
-	 * @param curDim Reference dimension for sorting the points
-	 * @param l_idx Index of the left bound of the sub-list
-	 * @param r_idx Index of the right bound of the sub-list
+	 * @paran points 	The list we are sorting
+	 * @param curDim 	Reference dimension for sorting the points
+	 * @param l_idx 	Index of the left bound of the sub-list
+	 * @param r_idx 	Index of the right bound of the sub-list
 	 */
 	void KDTree_sort(vector<Point<Dim>>& points, int curDim, size_t l_idx, size_t r_idx);
 
@@ -258,11 +257,11 @@ class KDTree
 	 * Given the nth index, will set the nth smallest point to that index based on the
 	 * given dimension.
 	 *
-	 * @paran points The list we are searching through
-	 * @param curDim Reference dimension for partitioning the points
-	 * @param l_idx Index of the left bound of the sub-list
-	 * @param r_idx Index of the right bound of the sub-list
-	 * @param target_idx The index of where, if sorted, our point would be (n)
+	 * @paran points 		The list we are searching through
+	 * @param curDim 		Reference dimension for partitioning the points
+	 * @param l_idx 		Index of the left bound of the sub-list
+	 * @param r_idx 		Index of the right bound of the sub-list
+	 * @param target_idx 	The index of where, if sorted, our point would be (n)
 	 *
 	 */
 	void my_quick_select(vector<Point<Dim>>& points, int curDim, 
@@ -272,11 +271,11 @@ class KDTree
 	 * Organizes part of a list around a pivot, such that all elements to the left of the pivot are
 	 * smaller in the given dimension, and all elements to the right are larger.
 	 *
-	 * @paran points The list in which the partition will take place
-	 * @param curDim Reference dimension for partitioning the points
-	 * @param l_idx Index of the left bound of the partition
-	 * @param r_idx Index of the right bound of the partition
-	 * @param piv_idx Index of the pivot
+	 * @paran points 	The list in which the partition will take place
+	 * @param curDim 	Reference dimension for partitioning the points
+	 * @param l_idx 	Index of the left bound of the partition
+	 * @param r_idx 	Index of the right bound of the partition
+	 * @param piv_idx 	Index of the pivot
 	 */
 	size_t my_partition(vector<Point<Dim>>& points, int curDim, 
 		size_t l_idx, size_t r_idx, size_t piv_idx);
@@ -284,17 +283,36 @@ class KDTree
 	/**
 	 * Swaps two points within the given list.
 	 *
-	 * @paran points The list in which the swap will take place
-	 * @param idx_1 Index of one of the to-be-swapped points
-	 * @param idx_2 Index of the other to-be-swapped point
+	 * @paran points 	The list in which the swap will take place
+	 * @param idx_1 	Index of one of the to-be-swapped points
+	 * @param idx_2 	Index of the other to-be-swapped point
 	 */
 	void my_swap(vector<Point<Dim>>& points, size_t idx_1, size_t idx_2);
 
+	/**
+	 * Private recursive helper function for public member function findNearestNeighbor
+	 *
+	 * @param query 		the point in space we are looking for
+	 * @param leftIndex 	the index of the left-most node in our subarray
+	 * @param rightIndex 	the index of the rightmost node in our subarray
+	 * @param curDim 		the current dimension we are on
+	 * @param currentBest 	the best point we've found so far
+	 *
+	 * @return 				the point in the tree nearest to our query value
+	 */
     Point<Dim> findNearestNeighborHelper(const Point<Dim>& query,
                                 size_t leftIndex, size_t rightIndex, int curDim,
                                 Point<Dim> currentBest ) const;
 
 
+	/**
+	 * Computes the squared distance between two points
+	 *
+	 * @param first 	One of the point of interest
+	 * @param second 	The other point of interest
+	 *
+	 * @return 			The squared distance between the two points 
+	 */ 
     int dist( const Point<Dim> & first, const Point<Dim> & second) const;
 
 };

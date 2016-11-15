@@ -27,14 +27,6 @@ bool KDTree<Dim>::shouldReplace(const Point<Dim>& target,
 			(dist_potential_target < dist_curBest_target) : (potential < currentBest);
 }
 
-template <int Dim>
-KDTree<Dim>::KDTree(const vector<Point<Dim>>& newPoints)
-{
-	points = newPoints;
-	KDTree_sort(points, 0, 0, points.size()-1);
-}
-
-
 /*
 *  we have a vector Points that is sorted so as to give us a KDTree.
 *  we need to implement findnearestneighbor on it.
@@ -50,14 +42,6 @@ Point<Dim> KDTree<Dim>::findNearestNeighbor(const Point<Dim>& query) const
 	return findNearestNeighborHelper( query, 0, points.size()-1, 0, points[ rootIndex ] );
 }
 
-/*
-* @param query 		the point in space we are looking for
-* @param leftIndex  the index of the left-most node in our subarray
-* @param rightIndex the index of the rightmost node in our subarray
-* @param curDim		the current dimension we are on
-* @param currentBest the best point we've found so far
-* @return the point in the tree nearest to our query value
-*/
 template <int Dim>
 Point<Dim> KDTree<Dim>::findNearestNeighborHelper(const Point<Dim>& query,
 								size_t leftIndex, size_t rightIndex, int curDim,
@@ -114,15 +98,22 @@ Point<Dim> KDTree<Dim>::findNearestNeighborHelper(const Point<Dim>& query,
 	return currentBest;
 }
 
-// computer distance betweer two points
 template<int Dim>
 int KDTree<Dim>::dist( const Point<Dim> & first, const Point<Dim> & second) const
 {
     int retval = 0;
-    for ( int i=0 ; i<Dim ; i++ ) {
-        retval += pow( first[i] - second[i], 2);
+    for(int i = 0; i < Dim; i++)
+    {
+        retval += pow(first[i] - second[i], 2);
     }
     return retval;
+}
+
+template <int Dim>
+KDTree<Dim>::KDTree(const vector<Point<Dim>>& newPoints)
+{
+	points = newPoints;
+	KDTree_sort(points, 0, 0, points.size()-1);
 }
 
 template <int Dim>
@@ -130,7 +121,9 @@ void KDTree<Dim>::KDTree_sort(vector<Point<Dim>>& points, int curDim,
 										size_t l_idx, size_t r_idx)
 {
 	// Base case: If the left index is ever equal to or greater than the right, we're done
-	if(l_idx >= r_idx || points.size() == 0) return;
+	if(l_idx >= r_idx || points.size() == 0 || r_idx >= points.size() || l_idx < 0) return;
+
+	// cout << "KDTree_sort called on dim: " << curDim << ", (l,r): " << l_idx << ", " << r_idx << ")" << endl;
 
 	// Set the mid point of the current sub-list (dividing by 2 automatically floors the index)
 	size_t mid = l_idx + (r_idx - l_idx)/2;
