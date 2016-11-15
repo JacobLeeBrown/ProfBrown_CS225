@@ -31,6 +31,8 @@
 .svn
 .objs
 
+grade_report*
+
 # mp6
 testkdtree
 testkdtree-asan
