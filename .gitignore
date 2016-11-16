@@ -37,4 +37,9 @@ grade_report*
 testkdtree
 testkdtree-asan
 test
+photomosaic
+photomosaic-asan
+testmaptiles
+testmaptiles-asan
+
 
