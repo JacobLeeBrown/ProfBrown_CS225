@@ -114,7 +114,7 @@ template <class T, class Compare>
 T heap<T, Compare>::pop()
 {
 	// If the storage is empty, nothing to pop
-	if(_elems.size() == 0) return;
+	if(_elems.size() == 0) return T();
 	// Else, temperarily store the root value (will be returned later)
 	T retVal = _elems[root()];
 	// Assign last node value to root
